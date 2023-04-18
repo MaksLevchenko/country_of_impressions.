@@ -1,0 +1,20 @@
+{% extends 'travel_in_Russia/base.html' %}
+{% load static %}
+{% block title %}{% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}{% endblock %}
+{% block content %}
+    <div class="my-profile">
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" width="200"
+                 style="border-radius: 200px;" alt="{% static 'images/te2.jpg' %}">
+        {% else %}
+            <img src="{% static 'images/te2.jpg' %}" width="100" style="border-radius: 100px;" alt="">
+        {% endif %}
+        <h3>Логин: </h3><p>{{ user }}</p>
+        <h3>Имя: </h3><p>{{ user.first_name }}</p>
+        <h3>Email: </h3><p>{{ user.email }}</p>
+        <h3>Дата рождения: </h3><p>{{ user.profile.birth_date }}</p>
+        <a href="{% url 'redact' user.id %}">
+            <button class="mt-3 btn btn-success btn-block py-3" style="background: #9FA8DA;">Редактировать.</button>
+        </a>
+    </div>
+{% endblock %}

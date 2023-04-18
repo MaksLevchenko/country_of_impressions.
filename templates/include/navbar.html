@@ -1,0 +1,57 @@
+{% load static %}
+<div class="navbar2">
+    <div name="logo" class="logo">
+        <a href="/"><img src="{% static 'images/41.png' %}"
+                         width="475" height="98" alt=""></a>
+    </div>
+    <span class="prof-info">
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' user.id %}" style="color: #1b1b1b">
+            <span>
+                <img src="{{ user.profile.avatar.url }}" width="50"
+                     style="border-radius: 100px;" alt="{% static 'images/te2.jpg' %}">
+                {% if user.firstname %}
+                    {{ user.first_name }}
+                {% else %}
+                    {{ user.username }}
+                {% endif %}
+                    </span>
+            </a>
+            <a href="{% url 'account_logout' %}"
+               style="color: rgb(255, 255, 255); font-weight: 700;
+                text-transform: uppercase; padding-top: 10px;">
+                Выход
+            </a>
+        {% else %}
+            <a href="{% url 'account_login' %}"
+               style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase; padding-top: 10px;">
+                Вход
+            </a>
+            <a href="{% url 'account_signup' %}"
+               style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase; padding-top: 10px;">
+                Регистрация
+            </a>
+        {% endif %}
+    </span>
+</div>
+<div class="ser">
+    <div class="dropdown-center">
+        <button class="colorBtn btn btn-secondary dropdown-toggle"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: #9FA8DA">
+            Фильтры
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                {% include 'include/sidebar.html' %}
+            </li>
+        </ul>
+    </div>
+    <form action="{% url 'search' %}" method="get"
+          class="ser2 d-flex editContent">
+        <input type="search" placeholder="Введите название..." name="q"
+               class="form-control" required="">
+        <button type="submit" class="btn btn-success" style="background: #9FA8DA;">
+            <span class="fa fa-search" aria-hidden="true">Поиск</span>
+        </button>
+    </form>
+</div>

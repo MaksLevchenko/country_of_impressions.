@@ -1,0 +1,30 @@
+{% load city_tag %}
+{% block sidebar %}
+    <form action="{% url 'filter' %}" method="get" name="filter">
+        <h3 class="sear-head editContent">Годы основания</h3>
+        <div class="prokrutka">
+            <ul class="w3layouts-box-list">
+                {% for _, century in view.get_century %}
+                    <li class="editContent">
+                        <input type="checkbox" class="checked" name="founding_date" value="{{ century }}">
+                        <span class="span editContent">{{ century }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="left-side">
+            <h3 class="sear-head editContent">Основатель</h3>
+            <div class="prokrutka">
+                <ul class="w3layouts-box-list">
+                    {% for founder in view.get_founder %}
+                        <li class="editContent">
+                            <input type="checkbox" class="checked" name="founder" value="{{ founder }}">
+                            <span class="span editContent">{{ founder }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" style="background: #9FA8DA;">Найти</button>
+    </form><br>
+{% endblock %}
